@@ -5,6 +5,17 @@ import os
 # 1. PAGE CONFIG (Applies to the whole site)
 st.set_page_config(page_title="Privio", page_icon="🛡️", layout="wide")
 
+# Custom CSS styling for a sleek cybersecurity look
+st.markdown("""
+    <style>
+    /* Style buttons to pop */
+    .stButton>button {
+        border-radius: 8px;
+        font-weight: bold;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 # Connect to Featherless AI (happens in the background)
 client = OpenAI(
     base_url="https://api.featherless.ai/v1",
