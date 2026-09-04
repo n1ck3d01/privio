@@ -75,7 +75,7 @@ with tab2:
                     {"role": "user", "content": f"My password is: {user_password}"}
                 ]
             )
-        st.error("🚨 Critical Hit!")
+        st.error("📊 RISK ASSESSMENT RESULT:")
         st.write(response.choices[0].message.content)
     elif roast_btn and not user_password:
         st.warning("You have to enter a password first!")
