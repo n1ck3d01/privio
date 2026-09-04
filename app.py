@@ -94,7 +94,7 @@ with tab3:
                 import datetime
                 current_date = datetime.date.today().strftime("%B %d, %Y")
                 
-                prompt = f"Act as a cybersecurity threat intelligence system. Today's date is {current_date}. Analyze the risk profile for the email address or handle: {user_email}. Provide a simulated security audit report detailing potential exposure risks, credential stuffing vulnerability, and 3 actionable remediation steps."
+                prompt = f"Act as a cybersecurity threat intelligence system. Today's date is {current_date}. Analyze the risk profile for the email address or handle: {user_email}. Provide a simulated security audit report detailing potential exposure risks, credential stuffing vulnerability, and 3 actionable remediation steps. Sign off at the very end as 'Privio Intelligence Engine'."
                 
                 response = client.chat.completions.create(
                     model="Qwen/Qwen2.5-7B-Instruct",
