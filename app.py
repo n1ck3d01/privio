@@ -126,8 +126,9 @@ with tab3:
     
     user_email = st.text_input("Enter an email address to audit:")
     
-if st.button("Run Security Audit"):
+    if st.button("Run Security Audit"):
         if user_email:
+            # This check now lives strictly inside Tab 3's button logic
             if "@" not in user_email and "." not in user_email:
                 st.warning("⚠️ Please enter a valid email format (e.g., user@domain.com) for accurate threat analysis.")
             else:
