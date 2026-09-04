@@ -105,8 +105,9 @@ with tab3:
                 stream_container = st.empty()
                 full_response = ""
                 for chunk in response:
-                    if chunk.choices[0].delta.content:
-                        full_response += chunk.choices[0].delta.content
+                    if chunk.choices and chunk.choices[0].delta and chunk.choices[0].delta.content:
+                        content_chunk = chunk.choices[0].delta.content
+                        full_response += content_chunk
                         stream_container.markdown(full_response)
         else:
             st.warning("Please enter a valid email address first.")
