@@ -13,8 +13,8 @@ client = OpenAI(
 
 # 2. THE SIDEBAR
 with st.sidebar:
-    st.sidebar.image("logo.png", width=150)
-    st.header("🛡️ Privio")
+    st.sidebar.image("logo.png", use_container_width=True)
+    # st.header("🛡️ Privio")
     st.write("Two tools. One mission: Keeping your data safe.")
     st.write("---")
     st.write("**Built by:**")
