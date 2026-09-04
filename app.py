@@ -1,8 +1,3 @@
-import datetime
-                current_date = datetime.date.today().strftime("%B %d, %Y")
-                
-                prompt = f"Act as a cybersecurity threat intelligence system. Today's date is {current_date}. Analyze the risk profile for the email address or handle: {user_email}. Provide a simulated security audit report detailing potential exposure risks, credential stuffing vulnerability, and 3 actionable remediation steps."
-
 import streamlit as st
 from openai import OpenAI
 import os
@@ -96,10 +91,11 @@ with tab3:
     if st.button("Run Security Audit"):
         if user_email:
             with st.spinner("Analyzing threat intelligence logs..."):
-                # Constructing the prompt for your Featherless.ai / Qwen backend
-                prompt = f"Act as a cybersecurity threat intelligence system. Analyze the risk profile for the email address or handle: {user_email}. Provide a simulated security audit report detailing potential exposure risks, credential stuffing vulnerability, and 3 actionable remediation steps."
+                import datetime
+                current_date = datetime.date.today().strftime("%B %d, %Y")
                 
-                # Make sure this matches your existing API call variable from the other tabs
+                prompt = f"Act as a cybersecurity threat intelligence system. Today's date is {current_date}. Analyze the risk profile for the email address or handle: {user_email}. Provide a simulated security audit report detailing potential exposure risks, credential stuffing vulnerability, and 3 actionable remediation steps."
+                
                 response = client.chat.completions.create(
                     model="Qwen/Qwen2.5-7B-Instruct",
                     messages=[{"role": "user", "content": prompt}],
