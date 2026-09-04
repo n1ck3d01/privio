@@ -1,3 +1,8 @@
+import datetime
+                current_date = datetime.date.today().strftime("%B %d, %Y")
+                
+                prompt = f"Act as a cybersecurity threat intelligence system. Today's date is {current_date}. Analyze the risk profile for the email address or handle: {user_email}. Provide a simulated security audit report detailing potential exposure risks, credential stuffing vulnerability, and 3 actionable remediation steps."
+
 import streamlit as st
 from openai import OpenAI
 import os
