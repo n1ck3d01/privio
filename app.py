@@ -20,7 +20,7 @@ with st.sidebar:
     st.write("- Nikhil Shaurya")
     st.write("- Aditya")
     st.write("- Jacintha Goldy")
-    st.write("- Kruthika reddy")
+    st.write("- Kruthika Reddy")
     st.info("Powered by Featherless AI")
 
 # 3. CREATE THE TABS
