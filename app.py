@@ -32,7 +32,7 @@ tab1, tab2, tab3 = st.tabs(["Privacy Policy Scanner", "Password Roaster", "Data 
 # TAB 1: THE PRIVACY SCANNER
 # ==========================================
 with tab1:
-    st.header("Sketchy App Scanner")
+    st.header("Privacy Policy Scanner")
     st.write("Paste a Terms of Service agreement below to find the red flags.")
     
     col1, col2 = st.columns(2)
