@@ -5,16 +5,42 @@ import os
 # 1. PAGE CONFIG (Applies to the whole site)
 st.set_page_config(page_title="Privio", page_icon="🛡️", layout="wide")
 
-# Custom CSS styling for a sleek cybersecurity look
+# Custom CSS styling for a high-end cybersecurity look with background tint
 st.markdown("""
     <style>
-    /* Style buttons to pop */
+    /* Tint the main app background */
+    .stApp {
+        background-color: #0b0f19;
+    }
+    
+    /* Give the sidebar a distinct, clean shade */
+    [data-testid="stSidebar"] {
+        background-color: #111827;
+    }
+
+    /* Style buttons to have a sleek cyber border and rounded edges */
     .stButton>button {
+        border: 1px solid #3b82f6;
         border-radius: 8px;
         font-weight: bold;
+        transition: all 0.3s ease;
+    }
+    
+    /* Hover effect for buttons */
+    .stButton>button:hover {
+        border-color: #60a5fa;
+        background-color: #1e3a8a;
+        color: white;
+    }
+
+    /* Style text input boxes */
+    .stTextInput>div>div>input {
+        background-color: #1f2937;
+        color: white;
+        border-radius: 6px;
     }
     </style>
-""", unsafe_allow_html=True)
+""", unsafe_allow_html=True,)
 
 # Connect to Featherless AI (happens in the background)
 client = OpenAI(
