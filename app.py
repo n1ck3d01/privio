@@ -52,7 +52,7 @@ client = OpenAI(
 with st.sidebar:
     st.sidebar.image("logo.png", use_container_width=True)
     # st.header("🛡️ Privio")
-    st.write("Three tools. One mission: Keeping your data safe.")
+    st.write("Three enterprise tools. One mission: Total data defense.")
     st.write("---")
     st.write("**Built by:**")
     st.write("- Nikhil Shaurya")
@@ -126,27 +126,30 @@ with tab3:
     
     user_email = st.text_input("Enter an email address to audit:")
     
-    if st.button("Run Security Audit"):
+if st.button("Run Security Audit"):
         if user_email:
-            with st.spinner("Analyzing threat intelligence logs..."):
-                import datetime
-                current_date = datetime.date.today().strftime("%B %d, %Y")
-                
-                prompt = f"Act as a cybersecurity threat intelligence system. Today's date is {current_date}. Analyze the risk profile for the email address or handle: {user_email}. Provide a simulated security audit report detailing potential exposure risks, credential stuffing vulnerability, and 3 actionable remediation steps. Sign off at the very end as 'Privio Intelligence Engine'."
-                
-                response = client.chat.completions.create(
-                    model="Qwen/Qwen2.5-7B-Instruct",
-                    messages=[{"role": "user", "content": prompt}],
-                    stream=True
-                )
-                
-                st.subheader("🔴 SECURITY DEFICIT IDENTIFIED:")
-                stream_container = st.empty()
-                full_response = ""
-                for chunk in response:
-                    if chunk.choices and chunk.choices[0].delta and chunk.choices[0].delta.content:
-                        content_chunk = chunk.choices[0].delta.content
-                        full_response += content_chunk
-                        stream_container.markdown(full_response)
+            if "@" not in user_email and "." not in user_email:
+                st.warning("⚠️ Please enter a valid email format (e.g., user@domain.com) for accurate threat analysis.")
+            else:
+                with st.spinner("Analyzing threat intelligence logs..."):
+                    import datetime
+                    current_date = datetime.date.today().strftime("%B %d, %Y")
+                    
+                    prompt = f"Act as a cybersecurity threat intelligence system. Today's date is {current_date}. Analyze the risk profile for the email address or handle: {user_email}. Provide a simulated security audit report detailing potential exposure risks, credential stuffing vulnerability, and 3 actionable remediation steps. Sign off at the very end as 'Privio Intelligence Engine'."
+                    
+                    response = client.chat.completions.create(
+                        model="Qwen/Qwen2.5-7B-Instruct",
+                        messages=[{"role": "user", "content": prompt}],
+                        stream=True
+                    )
+                    
+                    st.subheader("🔴 SECURITY DEFICIT IDENTIFIED:")
+                    stream_container = st.empty()
+                    full_response = ""
+                    for chunk in response:
+                        if chunk.choices and chunk.choices[0].delta and chunk.choices[0].delta.content:
+                            content_chunk = chunk.choices[0].delta.content
+                            full_response += content_chunk
+                            stream_container.markdown(full_response)
         else:
             st.warning("Please enter a valid email address first.")
