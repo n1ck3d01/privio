@@ -25,7 +25,7 @@ with st.sidebar:
 
 # 3. CREATE THE TABS
 # This creates the clickable navigation menu at the top of the page
-tab1, tab2 = st.tabs(["🚨 Privacy Policy Scanner", "🔥 Password Roaster"])
+tab1, tab2, tab3 = st.tabs(["Privacy Policy Scanner", "Password Roaster", "Data Breach Checker"])
 
 # ==========================================
 # TAB 1: THE PRIVACY SCANNER
@@ -79,3 +79,34 @@ with tab2:
         st.write(response.choices[0].message.content)
     elif roast_btn and not user_password:
         st.warning("You have to enter a password first!")
+
+# TAB 3
+
+with tab3:
+    st.header("Data Breach & Credential Exposure Checker")
+    st.write("Check if an email address or username has been exposed in known public threat intelligence databases.")
+    
+    user_email = st.text_input("Enter an email address to audit:")
+    
+    if st.button("Run Security Audit"):
+        if user_email:
+            with st.spinner("Analyzing threat intelligence logs..."):
+                # Constructing the prompt for your Featherless.ai / Qwen backend
+                prompt = f"Act as a cybersecurity threat intelligence system. Analyze the risk profile for the email address or handle: {user_email}. Provide a simulated security audit report detailing potential exposure risks, credential stuffing vulnerability, and 3 actionable remediation steps."
+                
+                # Make sure this matches your existing API call variable from the other tabs
+                response = client.chat.completions.create(
+                    model="Qwen/Qwen2.5-7B-Instruct",
+                    messages=[{"role": "user", "content": prompt}],
+                    stream=True
+                )
+                
+                st.subheader("🔴 SECURITY DEFICIT IDENTIFIED:")
+                stream_container = st.empty()
+                full_response = ""
+                for chunk in response:
+                    if chunk.choices[0].delta.content:
+                        full_response += chunk.choices[0].delta.content
+                        stream_container.markdown(full_response)
+        else:
+            st.warning("Please enter a valid email address first.")
